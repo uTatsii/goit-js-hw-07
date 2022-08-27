@@ -19,10 +19,14 @@ function onImgClick(e) {
         return;
     }
 
-    const selectedImg = e.target;
-    const neededIndex = galleryItems.findIndex(item => item.description === selectedImg.alt);
-    const newLink = galleryItems[neededIndex].original;
-    selectedImg.src = newLink;
-    console.log(selectedImg.src);
+  const currentImgIndex = galleryItems.findIndex(
+    (item) => item.description === e.target.alt
+  );
+  
+  e.target.src = galleryItems[currentImgIndex].original;
+
+  const instance = basicLightbox.create(`<img src='${e.target.src}'>`);
+
+  instance.show();
 }
-console.log(gallery.classList);
+
