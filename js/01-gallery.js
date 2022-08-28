@@ -5,13 +5,18 @@ const gallery = document.querySelector(".gallery");
 const galleryMarkup = galleryItems
   .map(
     (galleryItem) => `<div class='gallery__item'>
-<img class='gallery__image' src='${galleryItem.preview}' 
-alt='${galleryItem.description}'/></div>`
+    <a class='gallery__link' href='${galleryItem.original}'>
+<img
+class='gallery__image'
+src='${galleryItem.preview}'
+data-source='${galleryItem.original}'
+alt='${galleryItem.description}'/>
+</a>
+</div>`
   )
   .join("");
 
 gallery.insertAdjacentHTML("beforeend", galleryMarkup);
-
 gallery.addEventListener("click", onImgClick);
 
 function onImgClick(e) {
@@ -21,13 +26,11 @@ function onImgClick(e) {
     return;
   }
 
-  const currentImgIndex = galleryItems.findIndex(
-    (item) => item.description === e.target.alt
+  e.preventDefault();
+
+  const originalImg = basicLightbox.create(
+    `<img src='${e.target.dataset.source}'>`
   );
-
-  e.target.src = galleryItems[currentImgIndex].original;
-
-  const originalImg = basicLightbox.create(`<img src='${e.target.src}'>`);
 
   originalImg.show();
 }
