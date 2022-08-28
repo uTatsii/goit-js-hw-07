@@ -6,13 +6,13 @@ const galleryMarkup = galleryItems
   .map(
     (galleryItem) => `<div class='gallery__item'>
     <a class='gallery__link' href='${galleryItem.original}'>
-<img
-class='gallery__image'
-src='${galleryItem.preview}'
-data-source='${galleryItem.original}'
-alt='${galleryItem.description}'/>
-</a>
-</div>`
+    <img
+    class='gallery__image'
+    src='${galleryItem.preview}'
+    data-source='${galleryItem.original}'
+    alt='${galleryItem.description}'/>
+    </a>
+    </div>`
   )
   .join("");
 
@@ -37,7 +37,6 @@ function onImgClick(e) {
   const modalIsOpen = document.querySelector(".basicLightbox");
 
   if (modalIsOpen) {
-
     console.log(modalIsOpen);
 
     document.addEventListener("keydown", modalEscClose);
@@ -48,7 +47,8 @@ function onImgClick(e) {
 
       if (e.code === "Escape") {
         originalImg.close();
-        document.removeEventListener('keydown', modalEscClose);
+        document.removeEventListener("keydown", modalEscClose);
+        return;
       }
     }
   }
