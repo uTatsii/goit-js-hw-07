@@ -33,4 +33,23 @@ function onImgClick(e) {
   );
 
   originalImg.show();
+
+  const modalIsOpen = document.querySelector(".basicLightbox");
+
+  if (modalIsOpen) {
+
+    console.log(modalIsOpen);
+
+    document.addEventListener("keydown", modalEscClose);
+
+    function modalEscClose(e) {
+      e.preventDefault();
+      console.log("esc");
+
+      if (e.code === "Escape") {
+        originalImg.close();
+        document.removeEventListener('keydown', modalEscClose);
+      }
+    }
+  }
 }
