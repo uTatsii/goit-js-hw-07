@@ -12,21 +12,22 @@ alt='${galleryItem.description}'/></div>`
 
 gallery.insertAdjacentHTML("beforeend", galleryMarkup);
 
-gallery.addEventListener('click', onImgClick);
+gallery.addEventListener("click", onImgClick);
 
 function onImgClick(e) {
-    if (e.target.classList === 'gallery') {
-        return;
-    }
+  const isImgEl = e.target.classList.contains("gallery__image");
+
+  if (!isImgEl) {
+    return;
+  }
 
   const currentImgIndex = galleryItems.findIndex(
     (item) => item.description === e.target.alt
   );
-  
+
   e.target.src = galleryItems[currentImgIndex].original;
 
-  const instance = basicLightbox.create(`<img src='${e.target.src}'>`);
+  const originalImg = basicLightbox.create(`<img src='${e.target.src}'>`);
 
-  instance.show();
+  originalImg.show();
 }
-
