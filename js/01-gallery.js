@@ -33,11 +33,7 @@ function onImgClick(e) {
     `<img class='modalImg' src='${e.target.dataset.source}' alt='${e.target.alt}'>`
   );
 
-  img.show();
-
-  document.addEventListener("keydown", modalEscClose);
-
-  function modalEscClose(e) {
+  img.show(document.addEventListener("keydown", function modalEscClose(e) {
     e.preventDefault();
 
   if (e.code === "Escape") {
@@ -45,5 +41,6 @@ function onImgClick(e) {
       document.removeEventListener("keydown", modalEscClose);
       return;
     }
-  }
+  }));
+
 }
