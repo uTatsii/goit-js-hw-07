@@ -17,6 +17,7 @@ const galleryMarkup = galleryItems
   .join("");
 
 gallery.insertAdjacentHTML("beforeend", galleryMarkup);
+
 gallery.addEventListener("click", onImgClick);
 
 function onImgClick(e) {
