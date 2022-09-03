@@ -2,9 +2,11 @@ import { galleryItems } from "./gallery-items.js";
 // Change code below this line
 const gallery = document.querySelector(".gallery");
 
+let modalImg = null;
+
 const galleryMarkup = galleryItems
   .map(
-    ({ original, preview, description }) => `<div class='gallery__item'>
+    ({original, preview, description}) => `<div class='gallery__item'>
     <a class='gallery__link' href='${original}'>
     <img
     class='gallery__image'
@@ -21,29 +23,27 @@ gallery.insertAdjacentHTML("beforeend", galleryMarkup);
 gallery.addEventListener("click", openModalImg);
 
 function openModalImg(e) {
-  e.preventDefault();
-
-  const isImgEl = e.target.nodeName("IMG");
+  const isImgEl = e.target.classList.contains("gallery__image");
 
   if (!isImgEl) {
     return;
   }
 
-  const img = basicLightbox.create(
-    `<img class='modalImg' src='${e.target.dataset.source}' alt='${e.target.alt}'>`
+  e.preventDefault();
+
+  modalImg = basicLightbox.create(
+    `<img src='${e.target.dataset.source}' alt='${e.target.alt}'>`
   );
 
-  img.show();
-
+  modalImg.show();
+  
   document.addEventListener("keydown", modalEscClose);
 
-  function modalEscClose(e) {
-    e.preventDefault();
-
-    if (e.code === "Escape") {
-      img.close();
-      document.removeEventListener("keydown", modalEscClose);
-      return;
-    }
+}
+function modalEscClose(e) {
+  if (e.code === "Escape") {
+    modalImg.close();
+    document.removeEventListener("keydown", modalEscClose);
+    return;
   }
 }
