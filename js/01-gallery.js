@@ -38,8 +38,8 @@ function openModalImg(e) {
   modalImg.show();
   
   document.addEventListener("keydown", modalEscClose);
-
 }
+
 function modalEscClose(e) {
   if (e.code === "Escape") {
     modalImg.close();
